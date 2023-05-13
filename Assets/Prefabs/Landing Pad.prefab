@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &909868049942283227
+--- !u!1 &6683489769989813510
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,8 +8,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3313634892119369580}
-  - component: {fileID: 5527049360910193418}
+  - component: {fileID: 2405446782088561512}
+  - component: {fileID: 6112203419493100601}
   m_Layer: 0
   m_Name: Point Light
   m_TagString: Untagged
@@ -17,35 +17,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3313634892119369580
+--- !u!4 &2405446782088561512
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909868049942283227}
+  m_GameObject: {fileID: 6683489769989813510}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 3.64, z: 0}
+  m_LocalPosition: {x: 0, y: 4.46, z: 0}
   m_LocalScale: {x: 0.07142857, y: 2, z: 0.07142857}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1424400232949256451}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!108 &5527049360910193418
+--- !u!108 &6112203419493100601
 Light:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 909868049942283227}
+  m_GameObject: {fileID: 6683489769989813510}
   m_Enabled: 1
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2.7
-  m_Range: 4.2
+  m_Intensity: 3.03
+  m_Range: 3.22
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
@@ -107,8 +107,8 @@ GameObject:
   - component: {fileID: 8991515406800172428}
   - component: {fileID: 7670549556243791442}
   m_Layer: 0
-  m_Name: Launch Pad
-  m_TagString: Friendly
+  m_Name: Landing Pad
+  m_TagString: Finish
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -125,7 +125,7 @@ Transform:
   m_LocalScale: {x: 14, y: 0.5, z: 14}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3313634892119369580}
+  - {fileID: 2405446782088561512}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -157,7 +157,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a3f2a075e6c15994da5dcdbcddfdf3e2, type: 2}
+  - {fileID: 2100000, guid: a9324ef52d74a8b47a69f6b1605f9328, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

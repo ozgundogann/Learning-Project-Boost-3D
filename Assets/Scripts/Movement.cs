@@ -1,18 +1,30 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    Rigidbody rb;
+    // PARAMETERS - for tuning, typically set in the editor
+    // CACHE - e.g. references for readability or speed
+    // STATE - private instance (member) variables
+
     [SerializeField] float mainThrust = 100f;
-    [SerializeField] float rotationThrust = 100f;
+    [SerializeField] float rotationThrust = 1f;
+    [SerializeField] AudioClip mainEngine;
+    [SerializeField] ParticleSystem mainEngineParticles;
+    [SerializeField] ParticleSystem leftThrusterParticles;
+    [SerializeField] ParticleSystem rightThrusterParticles;
+
+    Rigidbody rb;
     AudioSource audioSource;
+    bool isAlive;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();        
     }
 
     // Update is called once per frame
@@ -22,34 +34,80 @@ public class Movement : MonoBehaviour
         ProcessRotation();
     }
 
-    void ProcessThrust() 
+    void ProcessThrust()
     {
-        if(Input.GetKey(KeyCode.Space))
+        if (Input.GetKey(KeyCode.Space))
         {
-            rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-            /*if(!audioSource.isPlaying)
-                audioSource.Play();*/
+            StartThrusting();
         }
-        /*else
-            audioSource.Stop();*/
+        else
+        {
+            StopThrusting();
+        }
+    }
+    private void StartThrusting()
+    {
+        rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
+        if (!audioSource.isPlaying)
+        {
+            audioSource.PlayOneShot(mainEngine);
+        }
+        if (!mainEngineParticles.isPlaying)
+        {
+            Debug.Log("Particles playing!!!");
+            mainEngineParticles.Play();
+        }
+    }
+
+    private void StopThrusting()
+    {
+        audioSource.Stop();
+        mainEngineParticles.Stop();
     }
 
     void ProcessRotation()
     {
-        if(Input.GetKey(KeyCode.A))
+        if (Input.GetKey(KeyCode.A))
         {
-            ApplyRotation(rotationThrust);
+            RotateLeft();
         }
-        else if(Input.GetKey(KeyCode.D))
+        else if (Input.GetKey(KeyCode.D))
         {
-            ApplyRotation(-rotationThrust);
+            RotateRight();
+        }
+        else
+        {
+            StopRotatingParticles();
+        }
+    }
+    private void RotateLeft()
+    {
+        ApplyRotation(rotationThrust);
+        if (!rightThrusterParticles.isPlaying)
+        {
+            rightThrusterParticles.Play();
         }
     }
 
-    public void ApplyRotation(float rotationThisFrame)
+    private void RotateRight()
     {
-        rb.freezeRotation = true; // freezing rotation so we can manually rotate
+        ApplyRotation(-rotationThrust);
+        if (!leftThrusterParticles.isPlaying)
+        {
+            leftThrusterParticles.Play();
+        }
+    }
+    
+    private void StopRotatingParticles()
+    {
+        rightThrusterParticles.Stop();
+        leftThrusterParticles.Stop();
+    }
+
+    void ApplyRotation(float rotationThisFrame)
+    {
+        rb.freezeRotation = true;  // freezing rotation so we can manually rotate
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
-        rb.freezeRotation = false; // unfreezing rotation so physic system can take over
+        rb.freezeRotation = false;  // unfreezing rotation so the physics system can take over
     }
 }
