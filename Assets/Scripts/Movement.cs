@@ -66,14 +66,20 @@ public class Movement : MonoBehaviour
         }
         if (!mainEngineParticles.isPlaying)
         {
-            Debug.Log("Particles playing!!!");
             mainEngineParticles.Play();
         }
 
+        SpendFuel();
+    }
+
+    private void SpendFuel()
+    {
         slider.value -= sliderValue;
         if (slider.value <= 0)
         {
             this.enabled = false;
+            StopThrusting();
+            StopRotatingParticles();
         }
     }
 
