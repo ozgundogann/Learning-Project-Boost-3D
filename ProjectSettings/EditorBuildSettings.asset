@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Over.unity
+    path: Assets/Scenes/Below.unity
+    guid: 675f27f87ef88284fa664ec9bcc028ef
+  - enabled: 1
+    path: Assets/Scenes/Fuel.unity
+    guid: 8bb87674e3309b8438b7b6b86d1f5351
+  - enabled: 1
+    path: Assets/Scenes/OscillatingPlatform.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
-    path: Assets/Scenes/Below.unity
-    guid: 8bb87674e3309b8438b7b6b86d1f5351
+    path: Assets/Scenes/Tiny.unity
+    guid: 7831fd7a6bdcc474a9aa9ea93777d325
   m_configObjects: {}

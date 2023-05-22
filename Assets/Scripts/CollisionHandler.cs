@@ -4,11 +4,12 @@ using UnityEngine.SceneManagement;
 
 public class CollisionHandler : MonoBehaviour
 {
-    [SerializeField] float levelLoadDelay = 2f;
+    [SerializeField] public float levelLoadDelay = 2f;
     [SerializeField] AudioClip success;
     [SerializeField] AudioClip crash;
     [SerializeField] ParticleSystem successParticles;
     [SerializeField] ParticleSystem crashParticles;
+    [SerializeField] GameObject tinyRocket;
     AudioSource audioSource;
     bool isTransitioning = false;
     bool collisionDisabled = false;
@@ -17,7 +18,11 @@ public class CollisionHandler : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
     }
-    
+
+    void Update() 
+    {
+        RespondToDebugKeys();
+    }
     void OnCollisionEnter(Collision other) 
     {
         if (isTransitioning || collisionDisabled) { return; }
@@ -34,13 +39,27 @@ public class CollisionHandler : MonoBehaviour
                 break;
         }
         
-    }
-    void Update() 
+    }    
+
+    void OnTriggerEnter(Collider other) 
     {
-        RespondToDebugKeys();
+        if(other.tag == "Tiny")
+        {
+            Debug.Log("tiny");
+            tinyRocket = Instantiate(tinyRocket);
+            tinyRocket.transform.position = this.transform.position;            
+            Destroy(GameObject.Find("Rocket"));
+        }
+
+        if(other.tag == "Fuel")
+        {
+            GetComponent<Movement>().FuelTaken();
+        }
+        
+        other.gameObject.SetActive(false);
     }
 
-    private void RespondToDebugKeys()
+    void RespondToDebugKeys()
     {
         if (Input.GetKeyDown(KeyCode.L))
         {
@@ -69,6 +88,7 @@ public class CollisionHandler : MonoBehaviour
         audioSource.PlayOneShot(crash);
         crashParticles.Play();
         GetComponent<Movement>().enabled = false;
+        Movement.HideUI();
         Invoke("ReloadLevel", levelLoadDelay);
     }
 
