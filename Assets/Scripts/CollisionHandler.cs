@@ -29,7 +29,6 @@ public class CollisionHandler : MonoBehaviour
         switch (other.gameObject.tag)
         {
             case "Friendly":
-                Debug.Log("This thing is friendly");
                 break;
             case "Finish":
                 StartSuccessSequence();
@@ -45,7 +44,6 @@ public class CollisionHandler : MonoBehaviour
     {
         if(other.tag == "Tiny")
         {
-            Debug.Log("tiny");
             tinyRocket = Instantiate(tinyRocket);
             tinyRocket.transform.position = this.transform.position;            
             Destroy(GameObject.Find("Rocket"));

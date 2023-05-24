@@ -21,15 +21,16 @@ public class Movement : MonoBehaviour
     [SerializeField] float sliderValue;
 
     Rigidbody rb;
-    AudioSource audioSource;
-    AudioSource energyDownSource;
+    AudioSource[] audioSources;
+    //AudioSource energyDownSource;
     static RawImage fuelBar;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        audioSource = GetComponent<AudioSource>();
+        audioSources = GetComponents<AudioSource>();
+        //energyDownSource = GetComponent<AudioSource>();
         fuelBar = GetComponentInChildren<RawImage>();
     }
 
@@ -60,9 +61,9 @@ public class Movement : MonoBehaviour
     private void StartThrusting()
     {
         rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime);
-        if (!audioSource.isPlaying)
+        if (!audioSources[0].isPlaying)
         {
-            audioSource.PlayOneShot(mainEngine);
+            audioSources[0].PlayOneShot(mainEngine);
         }
         if (!mainEngineParticles.isPlaying)
         {
@@ -77,6 +78,7 @@ public class Movement : MonoBehaviour
         slider.value -= sliderValue;
         if (slider.value <= 0)
         {
+            audioSources[1].PlayOneShot(energyDown);
             this.enabled = false;
             StopThrusting();
             StopRotatingParticles();
@@ -85,7 +87,7 @@ public class Movement : MonoBehaviour
 
     private void StopThrusting()
     {
-        audioSource.Stop();
+        audioSources[0].Stop();
         mainEngineParticles.Stop();
     }
 
