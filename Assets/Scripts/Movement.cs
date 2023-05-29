@@ -19,6 +19,7 @@ public class Movement : MonoBehaviour
     [SerializeField] ParticleSystem rightThrusterParticles;
     [SerializeField] Slider slider;
     [SerializeField] float sliderValue;
+    [SerializeField] GameObject rocket;
 
     Rigidbody rb;
     AudioSource[] audioSources;
@@ -30,7 +31,6 @@ public class Movement : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         audioSources = GetComponents<AudioSource>();
-        //energyDownSource = GetComponent<AudioSource>();
         fuelBar = GetComponentInChildren<RawImage>();
     }
 
@@ -38,12 +38,12 @@ public class Movement : MonoBehaviour
     void Update()
     {
         ProcessThrust();
-        ProcessRotation();        
+        ProcessRotation();              
     }
 
     void LateUpdate() 
     {
-        MoveImageWithObject();
+        MoveImageWithObject();    
     }
 
     void ProcessThrust()
@@ -73,9 +73,9 @@ public class Movement : MonoBehaviour
         SpendFuel();
     }
 
-    private void SpendFuel()
+    void SpendFuel()
     {
-        slider.value -= sliderValue;
+        slider.value -= sliderValue * Time.deltaTime;
         if (slider.value <= 0)
         {
             audioSources[1].PlayOneShot(energyDown);
@@ -107,7 +107,10 @@ public class Movement : MonoBehaviour
         }
     }
     
-    private void MoveImageWithObject() { fuelBar.transform.position = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, -3f, 0)); }
+    private void MoveImageWithObject() 
+    {
+        fuelBar.transform.position = Camera.main.WorldToScreenPoint(rocket.transform.position + new Vector3(0, -3f, 0));
+    }
 
     private void RotateLeft()
     {

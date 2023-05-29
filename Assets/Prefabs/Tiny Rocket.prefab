@@ -7,6 +7,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 231837207, guid: 07f830863fdc7e147b2ce0bc514d4f71, type: 3}
+      propertyPath: sliderValue
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 1636600350, guid: 07f830863fdc7e147b2ce0bc514d4f71, type: 3}
+      propertyPath: m_Volume
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 463213685522286676, guid: 07f830863fdc7e147b2ce0bc514d4f71, type: 3}
       propertyPath: m_LocalPosition.z
       value: -13.28
