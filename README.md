@@ -1,2 +1,2 @@
 # Learning Project Boost 3D 
- My first 3d project
+ This is my first 3d unity game project.
